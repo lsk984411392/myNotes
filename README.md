@@ -11,6 +11,6 @@
 - 4、输入命令：cd 仓库名   。进入这个文件夹下。
 - 5、输入命令：git add .
 - 6、输入命令：git commit -d"第一次提交"
-- 7、输入命令：git remote add origin
+- 7、输入命令：git remote add origin https://github.com/th720309/123.git
 - 8、输入命令：git push origin master
 - 会要求输入github的账号和密码，输入即可完成上传。
