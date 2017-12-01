@@ -15,19 +15,14 @@ https://jingyan.baidu.com/article/375c8e19da406325f2a229d1.html阿里云ECS服�
 
 
 配置环境：
-一些命令
 http://www.jianshu.com/p/2604e53a7f6a?from=singlemessage阿里云ECS建网站（建站）超详细全套完整图文教程！菜鸟必看  主要参照这个
 
-关闭防火墙：
-systemctl stop firewalld.service
-关闭防火墙开机自启动功能：
-systemctl disable firewalld.service
-#开启firewall
-systemctl start firewalld.service
-#禁止firewall开机启动
-systemctl disable firewalld.service 
-#查看默认防火墙状态（关闭后显示not running，开启后显示running）
-firewall-cmd --state 
+一些命令
+systemctl stop firewalld.service		关闭防火墙：
+systemctl disable firewalld.service		关闭防火墙开机自启动功能：
+systemctl start firewalld.service		#开启firewall
+systemctl disable firewalld.service 	#禁止firewall开机启动
+firewall-cmd --state 					#查看默认防火墙状态（关闭后显示not running，开启后显示running）
 
 分别解压jdk和tomcat的tar.gz的包，在配置下面的环境变量
 #vi /etc/profile
@@ -51,6 +46,16 @@ export JAVA_HOME=/usr/java/jdk/jdk1.8.0_151
 export JRE_HOME=/usr/java/jdk/jdk1.8.0_151/jre
 
 按照此网站的配置后，配置完成之后，访问不了，所以最后我把tomcat安装在了root跟目录下，重新配置一下就好了。
+将阿里云云服务器的配置增加安全组配置，增加8080端口，就可以了
+
+
+<!--
+		CATALINA_HOME=/usr/java/tomcat/apache-tomcat-7.0.82
+		CATALINA_BASE=/usr/java/tomcat/apache-tomcat-7.0.82
+		export JAVA_HOME JRE_HOME PATH CLASSPATH CATALINA_HOME
+-->可选项
+
+
 
 
 
