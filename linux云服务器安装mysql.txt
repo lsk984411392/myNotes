@@ -1,0 +1,61 @@
+1、首先，我们检测一下系统中是否已安装mysql的相关服务
+	执行命令：rpm -qa | grep -i mysql		无输出则证明未安装 ，有输出说明有安装mysql组件。
+	清空mysql组件。执行命令：rpm -ev MySQL-devel-5.6.23-1.linux_glibc2.5
+	查找所有mysql的文件夹。执行命令：find / -name mysql
+	清空所有mysql文件夹。执行命令：rm -rf /var/lib/mysql
+2、确认mysql清空后，安装mysql
+	去官网下载，社区版 免费，下载此操作系统的red hat enterprise linux/oracle linux，
+		这个版本MySQL-5.5.58-1.el7.x86_64.rpm-bundle.tar
+	上传到linux服务器上，解压。执行命令：tar -xvf MySQL-5.5.58-1.el7.x86_64.rpm-bundle.tar
+	得到几个子文件：MySQL-server-5.6.10-1.rhel5.x86_64.rpm：MySQL服务器；
+					MySQL-client-5.6.10-1.rhel5.x86_64.rpm：MySQL客户端；
+					MySQL-devel-5.6.10-1.rhel5.x86_64.rpm：Mysql开发依赖包。
+	安装服务器。执行命令：rpm -ivh MySQL-server-5.6.10-1.rhel5.x86_64.rpm
+						如果报错 则先按照依赖包：执行命令：yum install libaio
+	安装客户。执行命令：rpm -ivh MySQL-client-5.6.10-1.rhel5.x86_64.rpm
+	安装开发依赖包。执行命令：rpm -ivh MySQL-devel-5.5.28-1.rhel5.i386.rpm
+3、启动MySQL
+	执行命令：service mysql start  或 /etc/init.d/mysql start   或service mysqld start
+	启动mysql后，更改密码。	执行命令/usr/bin/mysqladmin -u root password 'new-password'
+									/usr/bin/mysqladmin -u root -h izuf6ful7yswndxha2stllz password 'new-password'
+4、解决远程登录却报错Host is not allowed to connect to this MySQL server
+	在装有MySQL的机器上登录MySQL mysql -u root -p密码
+	执行use mysql;
+	执行update user set host = '%' where user = 'root';这一句执行完可能会报错，不用管它。
+	执行FLUSH PRIVILEGES;
+	经过上面4步，就可以解决这个问题了。 update user set host = '%' where user = 'root';
+	注: 第四步是刷新MySQL的权限相关表，一定不要忘了，我第一次的时候没有执行第四步，结果一直不成功，最后才找到这个原因。
+
+	MySQL的几个重要目录
+		（1）数据库目录
+		　　 /var/lib/mysql/
+		（2）配置文件
+		　　 /usr/share/mysql（mysql.server命令及配置文件）
+		（3）相关命令
+		　　 /usr/bin(mysqladmin mysqldump等命令)
+		（4）启动脚本
+		　　 /etc/rc.d/init.d/（启动脚本文件mysql的目录）
+			
+?useUnicode=true&characterEncoding=utf-8
+
+qdm17157894.my3w.com
+
+
+linux命令：：：：：：：：：：：：：
+	
+查看是否安装mysql组件	rpm -qa | grep -i mysql	
+删除mysql组件			rpm -ev MySQL-devel-5.6.23-1.linux_glibc2.5
+mysql运行状态			service mysql status
+						service mysql stop
+						chkconfig --list | grep -i mysql
+查找所有mysql的文件夹	find / -name mysql
+删除文件夹				rm -rf /var/lib/mysql
+安装：					 rpm -ivh 
+
+查看存在僵尸进程					ps -aux|grep mysql
+先查看看看mysql服务是否已经启动. /etc/rc.d/init.d/mysql status 
+
+
+
+参考网站：：：：：：：：http://www.blogjava.net/amigoxie/archive/2013/02/22/395605.html
+
