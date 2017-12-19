@@ -1,0 +1,32 @@
+linux
+
+
+
+查看目录：	ll	查看当前目录下所有文件文件夹的详细信息（读写权限，组）
+			ls	仅列出当前目录可见文件
+				ls -l    # 列出当前目录可见文件详细信息。和ll一样
+				ls -hl   # 列出详细信息并以可读大小显示文件大小
+				ls -al   # 列出所有文件（包括隐藏）的详细信息
+			cd：切换目录
+			pwd：显示目前的目录
+			mkdir：创建一个新的目录
+			rmdir：删除一个空的目录
+			cp: 复制文件或目录	cp 目标文件夹  指定文件夹 -r 			cp 目标文件   指定文件夹 
+			rm: 移除文件或目录
+查看进程 	ps -aux | grep redis	查看Redis的进程
+
+解压		tar -zxf 目标文件名		
+编辑文件	vim
+修改权限	chmod u+x start-all.sh		给start-all.sh文件增加x（执行）权限
+redis启动	./redis-server redis.conf 
+redis关闭	./redis-cli shutdown
+redis强关	kill -9 redis进程号
+进入redis	./redis-cli -h 127.0.0.1 -p 6379
+创结集群 	./redis-trib.rb create --replicas 1 106.15.88.140:7001 106.15.88.140:7002 106.15.88.140:7003 106.15.88.140:7004 106.15.88.140:7005  106.15.88.140:7006
+
+防火墙设置修改							vim /etc/sysconfig/iptables
+防火墙重启								service iptables restart
+关闭防火墙								systemctl stop firewalld.service		
+关闭防火墙开机自启动功能				systemctl disable firewalld.service		
+开启firewall							systemctl start firewalld.service		
+查看默认防火墙状态（关闭后显示not running，开启后显示running）				firewall-cmd --state 					
